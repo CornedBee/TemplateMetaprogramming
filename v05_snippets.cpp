@@ -12,12 +12,9 @@ Result switchAny(const boost::any& a, Cases... cases)
                        Case c, Cases... cases) {
 
     template <typename Any>
-    std::result_of_t<Fn()> call(Any&) { return fn(); }
+    auto call(Any&) { return fn(); }
 
     template <typename Any>
-    std::result_of_t<Fn()> call(Any&) { return fn(); }
-
-    template <typename Any>
-    std::result_of_t<Fn(T&)> call(Any& a) {
+    auto call(Any& a) {
       return fn(*boost::unsafe_any_cast<T>(&a));
     }
