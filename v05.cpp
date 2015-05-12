@@ -10,7 +10,7 @@ namespace detail
     explicit DefaultCase(Fn fn) : fn(fn) {}
 
     bool supports(const std::type_info&) const { return true; }
-    std::result_of_t<Fn()> call(boost::any&) { return fn(); }
+    auto call(boost::any&) { return fn(); }
 
   private:
     Fn fn;
@@ -23,7 +23,7 @@ namespace detail
     explicit EmptyCase(Fn fn) : fn(fn) {}
 
     bool supports(const std::type_info& t) const { return t == typeid(void); }
-    std::result_of_t<Fn()> call(boost::any&) { return fn(); }
+    auto call(boost::any&) { return fn(); }
 
   private:
     Fn fn;

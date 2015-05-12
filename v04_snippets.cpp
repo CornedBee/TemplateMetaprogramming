@@ -1,6 +1,5 @@
-    std::result_of_t<Fn()> call(boost::any&) { return fn(); }
-
-    std::result_of_t<Fn()> call(boost::any&) { return fn(); }
+    std::result_of_t<Fn()>
+    auto call(boost::any&) { return fn(); }
 
     std::result_of_t<Fn(T&)>
     auto call(boost::any& a) {
