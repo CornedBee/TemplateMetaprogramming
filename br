@@ -1,0 +1,20 @@
+#!/bin/bash
+
+CLANG=/Users/watson/Applications/clang+llvm-3.6.0-x86_64-apple-darwin/bin/clang++
+BOOST=/Users/watson/Documents/Projects/boost-1.54
+GTEST=/Users/watson/Documents/Projects/gtest-1.7.0
+
+basename=${1%.cpp}
+source=${basename}.cpp
+shift
+
+if grep "int main" -q ${source}
+then
+  gtest=
+else
+  gtest="-L${GTEST}/libclang -I${GTEST}/include -lgtest_main -lgtest"
+fi
+
+${CLANG} -O3 -DNDEBUG -I${BOOST} -std=c++14 -stdlib=libc++ \
+    -o ${basename} ${source} ${gtest} && \
+  ./${basename} $@
