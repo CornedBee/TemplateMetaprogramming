@@ -15,6 +15,6 @@ else
   gtest="-L${GTEST}/libclang -I${GTEST}/include -lgtest_main -lgtest"
 fi
 
-${CLANG} -O3 -DNDEBUG -I${BOOST} -std=c++14 -stdlib=libc++ \
+${CLANG} -O3 -D_DEBUG -I${BOOST} -std=c++14 -stdlib=libc++ \
     -o ${basename} ${source} ${gtest} && \
   ./${basename} $@
