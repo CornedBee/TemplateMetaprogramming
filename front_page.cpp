@@ -7,4 +7,4 @@
 // http://llvm.org/releases/download.html#3.6.0
 
 // Get the code at GitHub:
-// <TODO>
+// https://github.com/CornedBee/TemplateMetaprogramming
