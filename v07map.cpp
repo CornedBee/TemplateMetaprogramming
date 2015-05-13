@@ -12,8 +12,10 @@ namespace detail
     explicit DefaultCase(Fn fn) : fn(fn) {}
 
     bool supports(const std::type_info&) const { return false; }
+    // Don't register the default case.
     template <typename Result, typename Any>
     void registerIn(std::map<std::type_index, std::function<Result (Any&)>>&) {}
+    // Still used by the fallback.
     auto call() { return fn(); }
 
   private:
@@ -62,7 +64,10 @@ namespace detail
     using F = std::function<Result (Any&)>;
     std::map<std::type_index, F> caseLookup;
 
+    // Call registerIn on all cases. This fold expression works in post-C++14
+    // (Clang with -std=c++1z).
     (cases.registerIn(caseLookup), ...);
+    // Earlier compilers need to use this stupid trick.
     /*int dummy[] = { 0,
       (cases.registerIn(caseLookup), 0)...
     };*/
@@ -71,6 +76,11 @@ namespace detail
     if (it == caseLookup.end())
       return d.call();
     return it->second(a);
+    // This has horrible performance. O(n*log(n)) for building the map,
+    // O(log(n)) for the lookup, and finally it does dynamic dispatch through
+    // the std::function.
+    // It's possible to be more efficient (e.g. do the map building only once)
+    // at significant complexity cost. Either way it inhibits inlining.
   }
 
   template <typename Result>

@@ -1,17 +1,5 @@
 #include "fluff.hpp"
 
-template <typename Result, typename... Cases>
-Result switchAny(boost::any& a, Cases... cases)
-{
-  return 0;
-}
-
-template <typename Fn>
-int defaultCase(Fn fn)
-{
-  return 0;
-}
-
 
 
 TEST(SwitchAny, usesDefaultCase)

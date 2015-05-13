@@ -149,7 +149,7 @@ std::string stringFromAny(const boost::any& a)
 
 
 // I use MSVC 2013 at work - no generic lambdas!
-// So we're back to lots of boilerplate.
+// So we're back to lots of boilerplate: the type is written twice.
 std::string stringFromAny(const boost::any& a)
 {
 	return switchAny(a,

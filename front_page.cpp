@@ -8,3 +8,5 @@
 
 // Get the code at GitHub:
 // https://github.com/CornedBee/TemplateMetaprogramming
+
+// Examples also depend on Boost and Googletest

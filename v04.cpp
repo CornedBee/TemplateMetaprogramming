@@ -28,19 +28,6 @@ namespace detail
     Fn fn;
   };
 
-  template <typename T, typename Fn>
-  class TypeCase
-  {
-  public:
-    explicit TypeCase(Fn fn) : fn(std::move(fn)) {}
-
-    bool supports(const std::type_info& t) const { return t == typeid(T); }
-    Fn getFn() const { return fn; }
-
-  private:
-    Fn fn;
-  };
-
   template <typename Result>
   Result switchAnyImpl(boost::any& a, const std::type_info& t) {
     assert(false && "No case matched.");
@@ -72,12 +59,6 @@ template <typename Fn>
 detail::EmptyCase<Fn> emptyCase(Fn fn)
 {
   return detail::EmptyCase<Fn>(fn);
-}
-
-template <typename T, typename Fn>
-detail::TypeCase<T, Fn> typeCase(Fn fn)
-{
-  return detail::TypeCase<T, Fn>(fn);
 }
 
 

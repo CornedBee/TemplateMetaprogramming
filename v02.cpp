@@ -38,12 +38,6 @@ detail::DefaultCase<Fn> defaultCase(Fn fn)
   return detail::DefaultCase<Fn>(fn);
 }
 
-template <typename Fn>
-detail::DefaultCase<Fn> emptyCase(Fn fn)
-{
-  return detail::DefaultCase<Fn>(fn);
-}
-
 
 
 TEST(SwitchAny, usesDefaultCase)

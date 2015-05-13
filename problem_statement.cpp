@@ -12,6 +12,7 @@ const T* decay(const T* t) { return t; }
 void problem()
 {
 	boost::any a1 = "yes"s;
+	// Assigning from the literal directly doesn't compile.
 	boost::any a2 = decay("no");
 	std::string s1 = boost::any_cast<std::string>(a1);
 	std::cout << s1 << "\n";
@@ -37,14 +38,17 @@ std::string stringFromAny(const boost::any& a);
 
 void solution()
 {
+  // Contained type is const char*
 	boost::any a1 = decay("yes1");
 	std::string s1 = stringFromAny(a1);
 	std::cout << s1 << "\n";
 
+	// Contained type is std::string
 	boost::any a2 = "yes2"s;
 	std::string s2 = stringFromAny(a2);
 	std::cout << s2 << "\n";
 
+	// Contained type is char*
 	char c3[] = "yes3";
 	boost::any a3 = decay(c3);
 	std::string s3 = stringFromAny(a3);
